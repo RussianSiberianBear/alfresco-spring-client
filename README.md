@@ -1,4 +1,4 @@
-git add .gitignore# Alfresco Content Services Spring Client
+# Alfresco Content Services Spring Client
 
 Полный типизированный Java-клиент Alfresco Content Services REST API, сгенерированный из официальных Swagger 2.0 спецификаций Alfresco API Explorer (`alfresco-core.yaml`, `alfresco-auth.yaml`, `alfresco-discovery.yaml`, `alfresco-search.yaml`).
 
