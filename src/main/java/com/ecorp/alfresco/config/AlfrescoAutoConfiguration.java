@@ -5,6 +5,7 @@ import com.ecorp.alfresco.exception.AlfrescoApiException;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.client.support.RestClientHttpServiceGroupConfigurer;
 import org.springframework.web.service.registry.ImportHttpServices;
 
@@ -76,7 +77,7 @@ public class AlfrescoAutoConfiguration {
             ));
 
             builder.defaultStatusHandler(
-                    status -> status.isError(),
+                    HttpStatusCode::isError,
                     (request, response) -> {
                         String body = new String(
                                 response.getBody().readAllBytes(),
