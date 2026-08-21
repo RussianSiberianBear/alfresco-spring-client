@@ -11,9 +11,10 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.ecorp.ecorp</groupId>
+    <groupId>com.ecorp</groupId>
     <artifactId>alfresco-spring-client</artifactId>
     <version>1.1.0</version>
+
     <name>alfresco-spring-client</name>
     <description>Typed Alfresco Content Services REST API client for Spring Boot 4.1 / Java 25</description>
 
@@ -24,22 +25,30 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot 4 dedicated starter for RestClient and HTTP Service Clients. -->
+        <!-- Spring Boot 4 starter for RestClient and HTTP Service Clients -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-restclient</artifactId>
         </dependency>
 
-        <!-- JSON serialization/deserialization (Jackson 3 in Spring Boot 4). -->
+        <!-- JSON serialization/deserialization (Jackson 3 in Spring Boot 4) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jackson</artifactId>
+            <artifactId>spring-boot-starter-json</artifactId>
         </dependency>
 
+        <!-- Configuration processor for IDE autocomplete -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!-- Для тестов (опционально) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -50,8 +59,39 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <release>${maven.compiler.release}</release>
+                    <parameters>true</parameters>  <!-- Важно! Сохраняет имена параметров для @PathVariable -->
+                </configuration>
+            </plugin>
+
+            <!-- Плагин для сборки обычного JAR (не fat JAR) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Отключаем Spring Boot Maven Plugin, чтобы не создавал fat JAR -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <!-- Репозиторий для публикации (если будете выкладывать в Maven Central или Nexus) -->
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </distributionManagement>
 </project>

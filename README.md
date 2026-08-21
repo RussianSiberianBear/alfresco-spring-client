@@ -15,7 +15,7 @@ git add .gitignore# Alfresco Content Services Spring Client
 
 ## Подключение
 
-Можно подключить этот проект Maven-модулем или скопировать пакет `com.ecorp.ecorp.alfresco` в основной проект.
+Можно подключить этот проект Maven-модулем или скопировать пакет `com.ecorp.alfresco` в основной проект.
 
 Минимальная конфигурация:
 
@@ -37,7 +37,7 @@ alfresco:
 
 ## Использование
 
-Все интерфейсы из `com.ecorp.ecorp.alfresco.api` автоматически становятся Spring beans.
+Все интерфейсы из `com.ecorp.alfresco.api` автоматически становятся Spring beans.
 
 ```java
 @Service
